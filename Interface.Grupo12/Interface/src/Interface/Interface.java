@@ -83,39 +83,38 @@ public class Interface extends JFrame {
         }
     }
 
- 
-   private void Compilar(){
-        
-   Lexico lexico = new Lexico();
-   //erro de tipo incompativel
-   lexico.setInput(new java.io.StringReader(editor.getText()));
-   try {
-   Token t = null;
-   while ( (t = lexico.nextToken()) != null ) {
-     System.out.println(t.getLexeme());
-     
-    // só escreve o lexema, necessário escrever t.getId, t.getPosition()
-   
-    // t.getId () - retorna o identificador da classe. Olhar Constants.java e adaptar, pois
-    // deve ser apresentada a classe por extenso
-    // t.getPosition () - retorna a posição inicial do lexema no editor, necessário adaptar
-    // para mostrar a linha
+    private void Compilar() {
 
-     // esse código apresenta os tokens enquanto não ocorrer erro
-     // no entanto, os tokens devem ser apresentados SÓ se não ocorrer erro, necessário adaptar
-    // para atender o que foi solicitado  
-   }
-   }
-   catch ( LexicalError e ) {  // tratamento de erros
-     System.out.println(e.getMessage() + " em " + e.getPosition());
- 
-     // e.getMessage() - retorna a mensagem de erro de SCANNER_ERRO (olhar ScannerConstants.java
-     // e adaptar conforme o enunciado da parte 2)
-     // e.getPosition() - retorna a posição inicial do erro, tem que adaptar para mostrar a
-     // linha  
+        Lexico lexico = new Lexico();
+        lexico.setInput(new java.io.StringReader(editor.getText()));
+        try {
+            Token t = null;
+            while ((t = lexico.nextToken()) != null) {
+                System.out.println(t.getLexeme());
+
+                // só escreve o lexema, necessário escrever t.getId, t.getPosition()
+                // t.getId () - retorna o identificador da classe. Olhar Constants.java e adaptar, pois
+                // deve ser apresentada a classe por extenso
+                // t.getPosition () - retorna a posição inicial do lexema no editor, necessário adaptar
+                // para mostrar a linha
+                // esse código apresenta os tokens enquanto não ocorrer erro
+                // no entanto, os tokens devem ser apresentados SÓ se não ocorrer erro, necessário adaptar
+                // para atender o que foi solicitado  
+                System.out.println("lexema");
+            }
+        } catch (LexicalError e) {  // tratamento de erros
+            System.out.println(e.getMessage() + " em " + e.getPosition());
+            // e.getMessage() - retorna a mensagem de erro de SCANNER_ERRO (olhar ScannerConstants.java
+            // e adaptar conforme o enunciado da parte 2)
+            // e.getPosition() - retorna a posição inicial do erro, tem que adaptar para mostrar a
+            // linha  
+            if (e.getMessage().equals("Caractere não esperado")) {
+                mensagem.setText("Erro na linha: " + e.getLinha(editor.getText())
+                        + e.getToken(editor.getText()) + " " + e.getMessage());
+            }
+        }
     }
-    }
-    
+
     public Interface() {
         // area que define que meu editor de texto vai possuir uma borda com numeros
         editor = new JTextArea();
@@ -164,10 +163,6 @@ public class Interface extends JFrame {
 
             }
         });
-        
-         
-         
-
 
         btnnovoctrl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fila.png")));
         btnnovoctrl.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -186,7 +181,7 @@ public class Interface extends JFrame {
         JButton button2 = new JButton("Abrir [CTRL + O]");
         button2.setHorizontalTextPosition(SwingConstants.CENTER);
         button2.setVerticalTextPosition(SwingConstants.BOTTOM);
-        
+
         // Inicio do botão abrir
         button2.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK), "abrir");
@@ -199,7 +194,6 @@ public class Interface extends JFrame {
 
                 // Mostra o explorador de arquivos para escolher um arq
                 int result = fileChooser.showOpenDialog(Interface.this);
-
 
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
@@ -314,7 +308,7 @@ public class Interface extends JFrame {
                 editor.copy();
             }
         });
-         button4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/copiar.png")));
+        button4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/copiar.png")));
         button4.setAlignmentY(0.0f);
         button4.setFont(new Font("SansSerif", Font.PLAIN, 9));
         button4.setMargin(new Insets(0, 0, 0, 0));
@@ -382,23 +376,23 @@ public class Interface extends JFrame {
         button7.setVerticalTextPosition(SwingConstants.BOTTOM);
 
         button7.setHorizontalTextPosition(SwingConstants.CENTER);
-       button7.addActionListener(new ActionListener() {
+        button7.addActionListener(new ActionListener() {
             @Override
-           public void actionPerformed(ActionEvent e) {
-                mensagem.setText("Compilação de programas ainda não foi implementada.");
+            public void actionPerformed(ActionEvent e) {
+
+                Compilar();
             }
-
         });
-
         button7.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0),
                 "compilar");
         button7.getActionMap().put("compilar", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mensagem.setText("Compilação de programas ainda não foi implementada.");
+                Compilar();
+
             }
         });
-        
+
         button7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/verifica.png")));
         button7.setBounds(610, 10, 100, 50);
         button7.setAlignmentY(0.0f);
@@ -576,8 +570,7 @@ public class Interface extends JFrame {
                     editor.cut();
                     break;
                 case "Compilar":
-                    
-     
+
                     break;
 
                 case "Equipe":
