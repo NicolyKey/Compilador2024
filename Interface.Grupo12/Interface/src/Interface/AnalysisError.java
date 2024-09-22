@@ -2,17 +2,41 @@ package Interface;
 
 public class AnalysisError extends Exception {
 
-    private int position;
+   private int position;
 
-    public AnalysisError(String msg, int position) {
+    public AnalysisError(String msg, int position)
+    {
         super(msg);
         this.position = position;
     }
 
-    public AnalysisError(String msg) {
+    public AnalysisError(String msg)
+    {
         super(msg);
         this.position = -1;
     }
+
+    public int getPosition()
+    {
+        return position;
+    }
+
+    public String toString()
+    {
+        return super.toString() + ", @ "+position;
+    }
+
+    public String getToken(String text) {
+        // Verifica se a posição está dentro dos limites do texto
+        if (position >= 0 && position < text.length()) {
+            // Retorna o token na posição específica
+            return String.valueOf(text.charAt(position));
+        } else {
+            return ""; // Retorna uma string vazia se a posição estiver fora dos limites
+        }
+    }
+
+   
 
     public int getLinha(String text) {
         int line = 1;
@@ -24,19 +48,4 @@ public class AnalysisError extends Exception {
         return line;
     }
 
-    public int getPosition() {
-        return position;
-    }
-
-    public String getToken(String text) {
-        if (position >= 0 && position < text.length()) {
-            return String.valueOf(text.charAt(position));
-        } else {
-            return ""; 
-        }
-    }
-
-    public String toString() {
-        return super.toString() + ", @ " + position;
-    }
 }

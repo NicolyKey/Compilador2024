@@ -100,7 +100,13 @@ public class Interface extends JFrame {
                 // esse código apresenta os tokens enquanto não ocorrer erro
                 // no entanto, os tokens devem ser apresentados SÓ se não ocorrer erro, necessário adaptar
                 // para atender o que foi solicitado  
-                System.out.println("lexema");
+                
+                t.getId();
+                t.getPosition(editor.getText());
+                
+                System.out.println(t.getTokenClassName());
+                System.out.println(t.getPosition(editor.getText()));
+                System.out.println("");
             }
         } catch (LexicalError e) {  // tratamento de erros
             System.out.println(e.getMessage() + " em " + e.getPosition());
