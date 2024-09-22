@@ -83,43 +83,37 @@ public class Interface extends JFrame {
         }
     }
 
-    private void Compilar() {
-
-        Lexico lexico = new Lexico();
-        lexico.setInput(new java.io.StringReader(editor.getText()));
-        try {
-            Token t = null;
-            while ((t = lexico.nextToken()) != null) {
-                System.out.println(t.getLexeme());
-
-                // só escreve o lexema, necessário escrever t.getId, t.getPosition()
-                // t.getId () - retorna o identificador da classe. Olhar Constants.java e adaptar, pois
-                // deve ser apresentada a classe por extenso
-                // t.getPosition () - retorna a posição inicial do lexema no editor, necessário adaptar
-                // para mostrar a linha
-                // esse código apresenta os tokens enquanto não ocorrer erro
-                // no entanto, os tokens devem ser apresentados SÓ se não ocorrer erro, necessário adaptar
-                // para atender o que foi solicitado  
-                
-                t.getId();
-                t.getPosition(editor.getText());
-                
-                System.out.println(t.getTokenClassName());
-                System.out.println(t.getPosition(editor.getText()));
-                System.out.println("");
-            }
-        } catch (LexicalError e) {  // tratamento de erros
-            System.out.println(e.getMessage() + " em " + e.getPosition());
-            // e.getMessage() - retorna a mensagem de erro de SCANNER_ERRO (olhar ScannerConstants.java
-            // e adaptar conforme o enunciado da parte 2)
-            // e.getPosition() - retorna a posição inicial do erro, tem que adaptar para mostrar a
-            // linha  
-            if (e.getMessage().equals("Caractere não esperado")) {
-                mensagem.setText("Erro na linha: " + e.getLinha(editor.getText())
-                        + e.getToken(editor.getText()) + " " + e.getMessage());
-            }
+   private void Compilar() {
+    Lexico lexico = new Lexico();
+    lexico.setInput(new java.io.StringReader(editor.getText()));
+    
+    StringBuilder resultado = new StringBuilder(); 
+    
+    try {
+        Token t = null;
+        while ((t = lexico.nextToken()) != null) {
+            resultado.append("Linha: ")
+                     .append(t.getPosition(editor.getText()))
+                     .append(" Classe: ")
+                     .append(t.getTokenClassName())
+                     .append(" Lexema: ")
+                     .append(t.getLexeme())
+                     .append("\n");  
         }
+        
+        mensagem.setText(resultado.toString());  
+        
+    } catch (LexicalError e) {
+        if (e.getMessage().equals("Simbolo invalido")) {
+            mensagem.setText("Linha " + e.getPosition(editor.getText()) + ": "
+                            + e.getToken(editor.getText()) + " " + e.getMessage());
+        } else {
+            mensagem.setText("Linha " + e.getPosition(editor.getText()) + ": " + e.getMessage());
+        }
+        mensagem.setPreferredSize(new Dimension(500, mensagem.getPreferredSize().height));
     }
+}
+
 
     public Interface() {
         // area que define que meu editor de texto vai possuir uma borda com numeros

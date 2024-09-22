@@ -16,9 +16,15 @@ public class AnalysisError extends Exception {
         this.position = -1;
     }
 
-    public int getPosition()
+    public int getPosition(String text)
     {
-        return position;
+        int line = 1;
+        for (int i = 0; i < position && i < text.length(); i++) {
+            if (text.charAt(i) == '\n') {
+                line++;
+            }
+        }
+        return line;
     }
 
     public String toString()
@@ -36,16 +42,6 @@ public class AnalysisError extends Exception {
         }
     }
 
-   
-
-    public int getLinha(String text) {
-        int line = 1;
-        for (int i = 0; i < position && i < text.length(); i++) {
-            if (text.charAt(i) == '\n') {
-                line++;
-            }
-        }
-        return line;
-    }
+  
 
 }

@@ -43,18 +43,18 @@ public class Token
             case Constants.t_cte_int: return "cte_int";
             case Constants.t_cte_real: return "cte_real";
             case Constants.t_string: return "String";
-            case Constants.t_main: return "Main";
-            case Constants.t_read: return "Read";
-            case Constants.t_true: return "True";
-            case Constants.t_false: return "False";
-            case Constants.t_write: return "Write";
-            case Constants.t_writeln: return "Writeln";
-            case Constants.t_if: return "If";
-            case Constants.t_elif: return "Elif";
-            case Constants.t_else: return "Else";
-            case Constants.t_repeat: return "Repeat";
-            case Constants.t_until: return "Until";
-            case Constants.t_while: return "While";
+            case Constants.t_main: return "pr";
+            case Constants.t_read: return "pr";
+            case Constants.t_true: return "pr";
+            case Constants.t_false: return "pr";
+            case Constants.t_write: return "pr";
+            case Constants.t_writeln: return "pr";
+            case Constants.t_if: return "pr";
+            case Constants.t_elif: return "pr";
+            case Constants.t_else: return "pr";
+            case Constants.t_repeat: return "pr";
+            case Constants.t_until: return "pr";
+            case Constants.t_while: return "pr";
             
             default: return "Token inválido ";
         }
