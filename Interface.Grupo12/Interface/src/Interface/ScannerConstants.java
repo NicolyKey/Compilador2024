@@ -3,7 +3,7 @@ package Interface;
 
 public interface ScannerConstants
 {
-  int[] SCANNER_TABLE_INDEXES = 
+    int[] SCANNER_TABLE_INDEXES = 
     {
         0,
         54,
@@ -1210,23 +1210,23 @@ public interface ScannerConstants
         {60, 41}
     };
 
-    int[] TOKEN_STATE = {-2,  0, 21, -1, -1, 33, 34, 28, 26, 30, 27, 29,  4,  4, 31, 24, 32, 25,  2,  2,  2,  2,  2, -1, 23,  6, -1, 19, -1, 22, -2, -2, 20,  5, -2,  3,  3, -1, -2,  3, -2,  0 };
+    int[] TOKEN_STATE = {-2,  0, 22, -1, -1, 34, 35, 29, 27, 31, 28, 30,  4,  4, 32, 25, 33, 26,  2,  2,  2,  2,  2, -1, 24,  6, -1, 20, -1, 23, -2, -2, 21,  5, -2,  3,  3, -1, -2,  3, -2,  0 };
 
     int[] SPECIAL_CASES_INDEXES =
-        { 0, 0, 0, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12 };
+        { 0, 0, 0, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13 };
 
     String[] SPECIAL_CASES_KEYS =
-        {  "elif", "else", "false", "if", "main", "read", "repeat", "true", "until", "while", "write", "writeln" };
+        {  "elif", "else", "end", "false", "if", "main", "read", "repeat", "true", "until", "while", "write", "writeln" };
 
     int[] SPECIAL_CASES_VALUES =
-        {  14, 15, 10, 13, 7, 8, 16, 9, 17, 18, 11, 12 };
+        {  14, 15, 19, 10, 13, 7, 8, 16, 9, 17, 18, 11, 12 };
 
     String[] SCANNER_ERROR =
     {
-        "simbolo invalido",
+        "Símbolo inválido",
         "",
         "",
-        "Constante_string invalida",
+        "constante_string inválida",
         "Erro identificando \"&&\"",
         "",
         "",
@@ -1249,21 +1249,21 @@ public interface ScannerConstants
         "Erro identificando \"||\"",
         "",
         "",
-        "Constante_string invalida",
+        " constante_string inválida ",
         "",
-        "Constante_real invalida",
+        " constante_real inválida ",
         "",
-        "Comentario de bloco invalido ou nao identificado",
-        "identificador invalido",
-        "",
-        "",
-        "Comentario de bloco invalido ou nao identificado",
+        "comentário de bloco inválido ou não finalizado ",
+        "identificador inválido ",
         "",
         "",
-        "Constante_real invalida",
-        "Comentario de bloco invalido ou nao identificado",
+        "comentário de bloco inválido ou não finalizado ",
         "",
-        "Comentario de bloco invalido ou nao identificado",
+        "",
+        " constante_real inválida ",
+        "comentário de bloco inválido ou não finalizado ",
+        "",
+        "comentário de bloco inválido ou não finalizado ",
         ""
     };
 

@@ -12,4 +12,8 @@ public class LexicalError extends AnalysisError
     {
         super(msg);
     }
+    
+      public LexicalError() {
+        super("Erro léxico não especificado"); // Mensagem padrão
+    }
 }

@@ -33,12 +33,10 @@ public class AnalysisError extends Exception {
     }
 
     public String getToken(String text) {
-        // Verifica se a posição está dentro dos limites do texto
         if (position >= 0 && position < text.length()) {
-            // Retorna o token na posição específica
             return String.valueOf(text.charAt(position));
         } else {
-            return ""; // Retorna uma string vazia se a posição estiver fora dos limites
+            return ""; 
         }
     }
 

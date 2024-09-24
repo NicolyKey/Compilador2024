@@ -101,17 +101,23 @@ public class Interface extends JFrame {
                      .append("\n");  
         }
         
-        mensagem.setText(resultado.toString());  
+        mensagem.setText(resultado.toString() + "\nPrograma compilado com sucesso"); 
+//        mensagem.setText("\nPrograma compilado com sucesso");
         
-    } catch (LexicalError e) {
-        if (e.getMessage().equals("Simbolo invalido")) {
+    }catch (LexicalError e) {
+        if (e.getMessage().equals("Simbolo invalido") || e.getMessage().equals("palavra reservada invalida"
+                + "")) {
             mensagem.setText("Linha " + e.getPosition(editor.getText()) + ": "
                             + e.getToken(editor.getText()) + " " + e.getMessage());
+            System.out.println(e.getToken(editor.getText()));
         } else {
             mensagem.setText("Linha " + e.getPosition(editor.getText()) + ": " + e.getMessage());
         }
+        
+        
         mensagem.setPreferredSize(new Dimension(500, mensagem.getPreferredSize().height));
     }
+        
 }
 
 
