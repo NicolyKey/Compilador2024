@@ -26,7 +26,7 @@ public class Token
 
     public final int getPosition(String text)
     {
-           int line = 1;
+        int line = 1;
         for (int i = 0; i < position && i < text.length(); i++) {
             if (text.charAt(i) == '\n') {
                 line++;
