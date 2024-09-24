@@ -7,23 +7,30 @@ public class Token
     private String lexeme;
     private int position;
 
-    public Token(int id, String lexeme, int position) throws LexicalError {
+    public Token(int id, String lexeme, int position) throws LexicalError
+    {
         this.id = id;
         this.lexeme = lexeme;
         this.position = position;
         
-        // Valida o lexeme ao criar o token
-       validateLexeme();
+        validateLexeme();
     }
 
-    public final int getId() {
+    public final int getId()
+    {
         return id;
     }
 
-    public final String getLexeme() {
+    public final String getLexeme()
+    {
         return lexeme;
     }
 
+
+    public String toString()
+    {
+        return id+" ( "+lexeme+" ) @ "+position;
+    };
     public final int getPosition(String text) {
         int line = 1;
         for (int i = 0; i < position && i < text.length(); i++) {
@@ -121,7 +128,4 @@ public class Token
 }
 
 
-    public String toString() {
-        return id + " ( " + lexeme + " ) @ " + position;
-    }
 }

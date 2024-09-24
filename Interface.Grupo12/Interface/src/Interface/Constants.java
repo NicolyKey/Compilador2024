@@ -1,7 +1,6 @@
 package Interface;
 
 
-
 public interface Constants extends ScannerConstants
 {
     int EPSILON  = 0;

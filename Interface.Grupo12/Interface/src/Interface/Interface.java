@@ -83,6 +83,7 @@ public class Interface extends JFrame {
         }
     }
 
+
    private void Compilar() {
     Lexico lexico = new Lexico();
     lexico.setInput(new java.io.StringReader(editor.getText()));
@@ -114,13 +115,10 @@ public class Interface extends JFrame {
             mensagem.setText("Linha " + e.getPosition(editor.getText()) + ": " + e.getMessage());
         }
         
-        
         mensagem.setPreferredSize(new Dimension(500, mensagem.getPreferredSize().height));
     }
         
 }
-
-
     public Interface() {
         // area que define que meu editor de texto vai possuir uma borda com numeros
         editor = new JTextArea();

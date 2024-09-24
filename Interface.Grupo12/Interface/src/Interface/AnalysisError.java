@@ -1,8 +1,9 @@
 package Interface;
 
-public class AnalysisError extends Exception {
 
-   private int position;
+public class AnalysisError extends Exception
+{
+    private int position;
 
     public AnalysisError(String msg, int position)
     {
@@ -39,7 +40,4 @@ public class AnalysisError extends Exception {
             return ""; 
         }
     }
-
-  
-
 }
