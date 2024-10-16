@@ -1,6 +1,5 @@
 package Interface;
 
-
 public class Lexico implements Constants
 {
     private int position;
@@ -15,6 +14,11 @@ public class Lexico implements Constants
     {
         setInput(input);
     }
+
+    public String getInput() {
+        return input;
+    }
+
 
     public void setInput(java.io.Reader input)
     {

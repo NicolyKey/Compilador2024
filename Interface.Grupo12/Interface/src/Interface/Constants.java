@@ -1,7 +1,10 @@
 package Interface;
 
-
-public interface Constants extends ScannerConstants
+/**
+ *
+ * @author achausmann
+ */
+public interface Constants extends ScannerConstants, ParserConstants
 {
     int EPSILON  = 0;
     int DOLLAR   = 1;

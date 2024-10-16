@@ -83,42 +83,43 @@ public class Interface extends JFrame {
         }
     }
 
+       private void Compilar() {
+        Lexico lexico = new Lexico();
+        System.out.println("teste00");
+        Sintatico sintatico = new Sintatico();
+        Semantico semantico = new Semantico();
+        
+        String text = editor.getText();
+        java.io.StringReader reader = new java.io.StringReader(text);
+        lexico.setInput(reader);
+        
+        System.out.println("esse aqui e o resultado do meu set Input   "+lexico.getInput());
 
-   private void Compilar() {
-    Lexico lexico = new Lexico();
-    lexico.setInput(new java.io.StringReader(editor.getText()));
-    
-    StringBuilder resultado = new StringBuilder(); 
-    
-    try {
-        Token t = null;
-        while ((t = lexico.nextToken()) != null) {
-            resultado.append("Linha: ")
-                     .append(t.getPosition(editor.getText()))
-                     .append(" Classe: ")
-                     .append(t.getTokenClassName())
-                     .append(" Lexema: ")
-                     .append(t.getLexeme())
-                     .append("\n");  
+        try {
+            System.out.println("teste1");
+            sintatico.parse(lexico, semantico);  // tradução dirigida pela sintaxe
+        
+           mensagem.setText("\nPrograma compilado com sucesso"); 
+        } 
+        catch (LexicalError e) {
+            System.out.println("teste2");
+            //Trata erros léxicos, conforme especificação da parte 2 - do compilador
+        } catch (SyntaticError e) {
+            System.out.println("teste3");
+            System.out.println(e.getPosition() + " símbolo encontrado: na entrada " + e.getMessage());
+
+            //Trata erros sintáticos
+            //linha 			      sugestão: converter getPosition em linha
+            //símbolo encontrado    sugestão: implementar um método getToken no sintatico
+            //símbolos esperados,   alterar ParserConstants.java, String[] PARSER_ERROR
+            // consultar os símbolos esperados no GALS (em Documentação > Tabela de Análise Sintática): 		
+        } catch (SemanticError e) {
+            System.out.println("teste004");
+            //Trata erros semânticos
         }
-        
-        mensagem.setText(resultado.toString() + "\nPrograma compilado com sucesso"); 
-//        mensagem.setText("\nPrograma compilado com sucesso");
-        
-    }catch (LexicalError e) {
-        if (e.getMessage().equals("Simbolo invalido") || e.getMessage().equals("palavra reservada invalida"
-                + "")) {
-            mensagem.setText("Linha " + e.getPosition(editor.getText()) + ": "
-                            + e.getToken(editor.getText()) + " " + e.getMessage());
-            System.out.println(e.getToken(editor.getText()));
-        } else {
-            mensagem.setText("Linha " + e.getPosition(editor.getText()) + ": " + e.getMessage());
-        }
-        
-        mensagem.setPreferredSize(new Dimension(500, mensagem.getPreferredSize().height));
+
     }
-        
-}
+
     public Interface() {
         // area que define que meu editor de texto vai possuir uma borda com numeros
         editor = new JTextArea();
