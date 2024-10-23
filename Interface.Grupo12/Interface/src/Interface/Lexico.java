@@ -15,11 +15,6 @@ public class Lexico implements Constants
         setInput(input);
     }
 
-    public String getInput() {
-        return input;
-    }
-
-
     public void setInput(java.io.Reader input)
     {
         StringBuffer bfr = new StringBuffer();
@@ -154,3 +149,4 @@ public class Lexico implements Constants
             return (char) -1;
     }
 }
+
