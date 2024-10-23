@@ -14,14 +14,6 @@ public class AnalysisError extends Exception {
         this.position = -1;
     }
 
-    public int getPosition() {
-        return position;
-    }
-
-    public String toString() {
-        return super.toString() + ", @ " + position;
-    }
-
     public int getPosition(String text) {
         int line = 1;
         for (int i = 0; i < position && i < text.length(); i++) {
@@ -33,10 +25,31 @@ public class AnalysisError extends Exception {
     }
 
     public String getToken(String text) {
+        // Verifica se a posição está dentro dos limites do texto
         if (position >= 0 && position < text.length()) {
-            return String.valueOf(text.charAt(position));
+            // Define os delimitadores de tokens, como espaços em branco, pontuações, etc.
+            String delimiters = "\t\n\r,;()[]{}+-*/=<>!&|";
+            int startPos = position;
+
+            // Move a posição para trás até encontrar um delimitador ou o início do texto
+            while (startPos > 0 && delimiters.indexOf(text.charAt(startPos - 1)) == -1) {
+                startPos--;
+            }
+
+            // Move a posição para frente até encontrar um delimitador ou o fim do texto
+            int endPos = position;
+            while (endPos < text.length() && delimiters.indexOf(text.charAt(endPos)) == -1) {
+                endPos++;
+            }
+
+            // Retorna o token entre startPos e endPos
+            return text.substring(startPos, endPos);
         } else {
-            return "";
+            return ""; // Retorna uma string vazia se a posição estiver fora dos limites
         }
+    }
+
+    public String toString() {
+        return super.toString() + ", @ " + position;
     }
 }

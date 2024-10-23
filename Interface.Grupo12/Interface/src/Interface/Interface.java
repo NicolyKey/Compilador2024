@@ -83,39 +83,40 @@ public class Interface extends JFrame {
         }
     }
 
-       private void Compilar() {
+    private void Compilar() {
         Lexico lexico = new Lexico();
-        System.out.println("teste00");
         Sintatico sintatico = new Sintatico();
         Semantico semantico = new Semantico();
-        
         String text = editor.getText();
         java.io.StringReader reader = new java.io.StringReader(text);
         lexico.setInput(reader);
-        
-        System.out.println("esse aqui e o resultado do meu set Input   "+lexico.getInput());
 
         try {
-            System.out.println("teste1");
             sintatico.parse(lexico, semantico);  // tradução dirigida pela sintaxe
-        
-           mensagem.setText("\nPrograma compilado com sucesso"); 
-        } 
-        catch (LexicalError e) {
-            System.out.println("teste2");
-            //Trata erros léxicos, conforme especificação da parte 2 - do compilador
-        } catch (SyntaticError e) {
-            System.out.println("teste3");
-            System.out.println(e.getPosition() + " símbolo encontrado: na entrada " + e.getMessage());
+            mensagem.setText("Programa compilado com sucesso");
 
-            //Trata erros sintáticos
-            //linha 			      sugestão: converter getPosition em linha
-            //símbolo encontrado    sugestão: implementar um método getToken no sintatico
-            //símbolos esperados,   alterar ParserConstants.java, String[] PARSER_ERROR
-            // consultar os símbolos esperados no GALS (em Documentação > Tabela de Análise Sintática): 		
-        } catch (SemanticError e) {
-            System.out.println("teste004");
-            //Trata erros semânticos
+        } catch (LexicalError e1) {
+            mensagem.setText("Erro na linha " + e1.getPosition(editor.getText()) + " - " + e1.getToken(editor.getText()) + " "
+                    + e1.getMessage());
+            if (e1.getMessage().equals("constante_string inválida")) {
+                mensagem.setText(
+                        "Erro na linha " + e1.getPosition(editor.getText()) + " - " + e1.getMessage());
+            }
+            mensagem.setPreferredSize(new Dimension(500, mensagem.getPreferredSize().height));
+        } catch (SyntaticError e2) {
+            String tokenClassName = sintatico.getTokenClassName(); 
+            String lexeme = sintatico.getToken(); 
+            String mensagemErro;
+
+            if (tokenClassName.equals("string")) {
+                mensagemErro = "Erro na linha " + e2.getPosition(editor.getText()) + " - encontrado constante_string " + e2.getMessage();
+            } else {
+                mensagemErro = "Erro na linha " + e2.getPosition(editor.getText()) + " - encontrado " + lexeme + " " + e2.getMessage();
+            }
+            mensagem.setText(mensagemErro);
+
+        } catch (SemanticError erroSemantico) {
+            //erros semânticos
         }
 
     }
