@@ -20,7 +20,7 @@ public class Token {
         return lexeme;
     }
 
-  public int getPosition() {
+    public final int getPosition() {
         return position;
     }
 
@@ -28,7 +28,6 @@ public class Token {
         return id + " ( " + lexeme + " ) @ " + position;
     }
 
-    ;
     
      // Método para validar o lexeme
     private void validateLexeme() throws LexicalError {
@@ -130,9 +129,5 @@ public class Token {
                 return "token_invalido"; // Para qualquer token não mapeado
         }
     }
-
-//    int getPosition() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
 
 }
